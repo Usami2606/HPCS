@@ -1,8 +1,6 @@
 // https://mpitutorial.com/tutorials/mpi-hello-world/
 #include <mpi.h>
 #include <stdio.h>
-// ver2
-
 
 int main(int argc, char** argv) {
     // Initialize the MPI environment
