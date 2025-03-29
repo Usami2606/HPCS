@@ -13,5 +13,5 @@ int main()
 {
 int i;
 for (i=0; i<1000; i++) A[i] = i;
-printf(sum = %d\n’’, sum(A,1000));
+printf(sum = %d\n'', sum(A,1000));
 }
