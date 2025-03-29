@@ -26,3 +26,7 @@ int main(int argc, char** argv) {
     MPI_Finalize();
 }
 // https://mpitutorial.com/tutorials/mpi-hello-world/
+
+// salloc -p ${PART} -N 1\
+//             -w ${NODE}\
+//             -- mpirun -np ${NP} ./sample2
