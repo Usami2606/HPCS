@@ -18,3 +18,8 @@ int main() {
 
     return 0;
 }
+
+// -bash-4.2$ gcc -fopenmp -o mpisum mpisum.c
+// -bash-4.2$ ./mpisum
+// sum = 499500
+// -bash-4.2$ 
