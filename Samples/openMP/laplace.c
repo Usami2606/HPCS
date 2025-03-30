@@ -10,6 +10,8 @@
 
 double second();
 
+void init(double f[YSIZE][XSIZE]);
+
 int main()
 {
     double start, end;
