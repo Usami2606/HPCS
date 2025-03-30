@@ -10,7 +10,7 @@
 
 double second();
 
-main()
+int main()
 {
     double start, end;
     double err, diff;
@@ -57,7 +57,7 @@ double second()
     return t;
 }
 /* initalize */
-init(double f[YSIZE][XSIZE])
+void init(double f[YSIZE][XSIZE])
 {
     int i, j;
     for(i = 0; i < YSIZE; i++)
