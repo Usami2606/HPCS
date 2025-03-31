@@ -7,7 +7,7 @@ int sum(int *a, int n) {
     s = 0;
 #pragma omp parallel
 {
-#pragma omp reduction(+:s)
+#pragma omp for reduction(+:s)
     for (i = 0; i < n; i++)
         s += a[i];
 }
