@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <omp.h>
 
-int A[1000];
-
 int sum(int *a, int n) {
     int s, i;
     s = 0;
