@@ -3,7 +3,7 @@
 int A[1000];
 
 int sum(int *a, int n) {
-    int s = 0, i;
+    int s, i;
     for (i = 0; i < n; i++)
         s += a[i];
     return s;
@@ -14,7 +14,7 @@ int main() {
     for (i = 0; i < 1000; i++)
         A[i] = i;
 
-    printf("sum = %d\n", sum(A, 1000));
+    printf("sum = %d\n", sum(A, 100));
 
     return 0;
 }
