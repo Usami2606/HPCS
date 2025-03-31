@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <omp.h>
 
 int A[1000];
 
