@@ -19,7 +19,7 @@ int main() {
     for (i = 0; i < 1000; i++)
         A[i] = i;
 
-    printf("sum = %d\n", sum(A, 100));
+    printf("sum = %d\n", sum(A, 1000));
 
     return 0;
 }
