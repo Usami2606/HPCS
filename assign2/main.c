@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <omp.h>
-#include "timer.c"
-#include "sum1.c"
 
 int main() {
     double starttime = second();
