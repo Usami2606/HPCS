@@ -66,3 +66,7 @@ void init(double f[YSIZE][XSIZE])
         for(j = 0; j < XSIZE; j++)
             f[i][j] = sin((double)j / XSIZE * PI) + cos((double)i / YSIZE * PI);
 }
+
+// -bash-4.2$ gcc -fopenmp -o laplace laplace.c -lm
+// -bash-4.2$ ./laplace
+// time = 2.514155 seconds
