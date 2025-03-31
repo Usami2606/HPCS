@@ -20,7 +20,7 @@ float sum(float *a, int n) {
 int main() {
     int i;
     for (i = 0; i < 1000; i++)
-        A[i] = (float)i + 0.5f;
+        A[i] = (float)i;
 
     printf("sum = %d\n", sum(A, 1000));
 
