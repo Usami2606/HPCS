@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 
-int A[1000];
+int A[100000];
 
 int main() {
     double starttime = second();
