@@ -10,7 +10,7 @@ int main() {
     for (i = 0; i < 100000; i++)
         A[i] = i;
 
-    printf("sum = %d\n", sum(A, 1000));
+    printf("sum = %d\n", sum(A, 100000));
 
     double endtime = second();
     printf("%f\n", endtime - starttime);
