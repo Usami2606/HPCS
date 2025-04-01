@@ -7,7 +7,7 @@ int main() {
     double starttime = second();
 
     int i;
-    for (i = 0; i < 1000; i++)
+    for (i = 0; i < 100000; i++)
         A[i] = i;
 
     printf("sum = %d\n", sum(A, 1000));
