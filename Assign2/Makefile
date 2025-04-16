@@ -4,7 +4,7 @@ FILE ?= ompsum.c  # デフォルトは ompsum.c
 
 run:
 	mkdir -p $(BIN_DIR)
-	gcc -fopenmp -o $(TARGET) $(FILE)
+	gcc -fopenmp -o $(TARGET) $(FILE) -lm
 
 clean:
 	rm -rf $(BIN_DIR)
