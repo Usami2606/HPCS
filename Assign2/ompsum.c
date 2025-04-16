@@ -24,8 +24,7 @@ int main() {
     start = second();
     int i;
     for (i = 0; i < 100000000; i++) A[i] = i;
-    // printf("sum = %lld\n", sum(A, 100000000));
-    printf("Thread is  %d\n",omp_get_num_threads());
+    printf("sum = %lld\n", sum(A, 100000000));
     end = second();
     printf("time = %f seconds\n", end - start);
 }
