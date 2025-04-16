@@ -13,7 +13,7 @@ while [ $threads -le $max_threads ]; do
 
     # 実行
     echo "Running with $OMP_NUM_THREADS threads"
-    ./bin/ompsum
+    ./bin/runprog
 
     # 次のスレッド数を倍にする
     threads=$((threads * 2))
