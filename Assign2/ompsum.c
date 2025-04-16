@@ -11,7 +11,6 @@ long long sum(int *a, int n) {
     long long s = 0;
 #pragma omp parallel
 {
-    printf("Thread is  %d\n",omp_get_num_threads());
 #pragma omp for reduction(+:s)
     for (i = 0; i < n; i++) s += a[i];
 }
