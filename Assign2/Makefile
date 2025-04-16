@@ -1,8 +1,6 @@
-# Makefile
-
 BIN_DIR = bin
 TARGET = $(BIN_DIR)/ompsum
-SRC = ompsum.c
+SRC = ompsum.c sum.c hello.c
 
 $(TARGET): $(SRC)
 	mkdir -p $(BIN_DIR)
