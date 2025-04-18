@@ -11,4 +11,4 @@ NUM_PROCS=$2
 
 # 実行
 echo "Running with $OMP_NUM_THREADS threads and $NUM_PROCS MPI processes"
-mpirun -np $NUM_PROCS ./bin/runprog
+mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
