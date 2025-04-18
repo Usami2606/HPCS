@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <mpi.h>
+#include "Timer.c"
 
 int main(int argc, char **argv)
 {
@@ -17,8 +18,11 @@ int main(int argc, char **argv)
 		MPI_Send(sendbuf, 1024, MPI_BYTE, 1, tag, MPI_COMM_WORLD);
 	} 
 	else if (rank == 1) {
+		start = second();
 		MPI_Recv(recvbuf, 1024, MPI_BYTE, 0, tag, MPI_COMM_WORLD, &status);
 		printf("recv string = %s\n", recvbuf);
+		end = second();
+		printf("Rank 1: Recv time = %f seconds\n", end - start);
 	}
 	MPI_Finalize();
 	return 0;
