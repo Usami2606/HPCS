@@ -3,6 +3,8 @@
 #include <sys/time.h>
 #include "Timer.c"
 
+double second();
+
 int main(int argc, char **argv)
 {
 	int rank, tag = 0;
