@@ -2,6 +2,7 @@
 #include <mpi.h>
 #include <sys/time.h>
 #include "Timer.c"
+#define BUFSIZE (10 * 1024 * 1024)
 
 double second();
 
@@ -18,11 +19,11 @@ int main(int argc, char **argv)
 	
 	if (rank == 0) {
 		sprintf(sendbuf, "send data from rank0 to rank1");
-		MPI_Send(sendbuf, 1024, MPI_BYTE, 1, tag, MPI_COMM_WORLD);
+		MPI_Send(sendbuf, BUFSIZE, MPI_BYTE, 1, tag, MPI_COMM_WORLD);
 	} 
 	else if (rank == 1) {
 		float start = second();
-		MPI_Recv(recvbuf, 1024, MPI_BYTE, 0, tag, MPI_COMM_WORLD, &status);
+		MPI_Recv(recvbuf, BUFSIZE, MPI_BYTE, 0, tag, MPI_COMM_WORLD, &status);
 		printf("recv string = %s\n", recvbuf);
 		float end = second();
 		printf("Rank 1: Recv time = %f seconds\n", end - start);
