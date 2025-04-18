@@ -24,6 +24,8 @@ int main(int argc, char **argv)
         printf("# Size (bytes), Time per transfer (us), Throughput (MB/s)\n");
     }
 
+    int s;
+
     for (int s = 0; s < num_sizes; s++) {
         int size = sizes[s];
         buffer = (char*)malloc(size);
@@ -32,7 +34,8 @@ int main(int argc, char **argv)
             memset(buffer, 'A', size);
             MPI_Barrier(MPI_COMM_WORLD);  // 同期
             start_time = MPI_Wtime();
-
+            
+            int i;
             for (int i = 0; i < NUM_REPEATS; i++) {
                 MPI_Send(buffer, size, MPI_BYTE, 1, 0, MPI_COMM_WORLD);
                 MPI_Recv(buffer, size, MPI_BYTE, 1, 0, MPI_COMM_WORLD, &status);
