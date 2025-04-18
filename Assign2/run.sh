@@ -3,19 +3,19 @@
 # Initial number of threads
 threads=1
 
-# 最大スレッド数（1024）
-max_threads=512
+# Maximum number of threads (256)
+max_threads=256
 
-# スレッド数が最大を超えるまで繰り返す
+# Repeat until the number of threads exceeds the maximum
 while [ $threads -le $max_threads ]; do
-    # OMP_NUM_THREADS を設定
+    # Set OMP_NUM_THREADS
     export OMP_NUM_THREADS=$threads
 
-    # 実行
+    # execution
     echo "Running with $OMP_NUM_THREADS threads"
     ./bin/runprog
 
-    # 次のスレッド数を倍にする
+    # Double the number of threads
     threads=$((threads * 2))
 done
 
