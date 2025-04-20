@@ -20,8 +20,9 @@ double sum(double *a, int n) {
 
 int main() {
     double start, end;
-    int i;
-
+    double time[20];
+    int i, j;
+    
     start = second();
 
 #pragma omp parallel for

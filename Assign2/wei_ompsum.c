@@ -1,36 +1,40 @@
 #include <stdio.h>
 #include <sys/time.h>
+#include <math.h>
 #include <omp.h>
 
 double second();
 
 #define N 100000000
 
-int A[N];
+double A[N];
 
-long long sum(int *a, int n) {
+double sum(double *a, int n) {
     int i;
-    long long s = 0;
+    double s = 0.0;
 #pragma omp parallel
 {
-#pragma omp for reduction(+:s)
-    for (i = 0; i < n; i++) s += a[i];
+#pragma omp parallel for reduction(+:s)
+    for (i = 0; i < n; i++) s += a[i]
 }
     return s;
 }
 
 int main() {
     double start, end;
-    double times[20];  // Array to store measurement time
-    int i, j;
+    double times[20];
+    int i,j;
 
     // Take 20 measurements
     for (j = 0; j < 20; j++) {
-        start = second();
-        for (i = 0; i < N; i++) A[i] = i;
-        sum(A, N);  // Performing calculations
-        end = second();
-        times[j] = end - start;  // Save the measured time in an array
+        start =second();
+        for (i = 0; i < N; i ++) {
+            double m = (double)(i + 1);
+            A[i] = (1.0 / m) * sin(1.0 / m);
+        }
+        sum(A, N);
+        end  = second();
+        times[j] = end -start;
     }
 
     // Calculate the average, maximum, and minimum
