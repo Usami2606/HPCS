@@ -28,6 +28,7 @@ int main() {
     // Take 20 measurements
     for (j = 0; j < 20; j++) {
         start =second();
+#pragma omp parallel for
         for (i = 0; i < N; i ++) {
             double m = (double)(i + 1);
             A[i] = (1.0 / m) * sin(1.0 / m);
