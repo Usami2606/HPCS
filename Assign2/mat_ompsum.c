@@ -42,8 +42,8 @@ int main() {
     double start, end;
     double times[20];  // Array to store measurement time
     int i;
-
-    for (int t = 0; t < 20; t++) {
+    int t;
+    for (t = 0; t < 20; t++) {
         initialize_matrices();
 
         start = second();
