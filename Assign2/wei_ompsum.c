@@ -15,7 +15,7 @@ double sum(double *a, int n) {
 #pragma omp parallel
 {
 #pragma omp parallel for reduction(+:s)
-    for (i = 0; i < n; i++) s += a[i]
+    for (i = 0; i < n; i++) s += a[i];
 }
     return s;
 }
