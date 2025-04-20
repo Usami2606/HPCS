@@ -8,7 +8,7 @@ double second();
 
 float A[N];
 
-float sum(int *a, int n) {
+float sum(float *a, int n) {
     int i;
     float s = 0;
 #pragma omp parallel
