@@ -5,7 +5,7 @@
 
 double second();
 
-#define N 100000
+#define N 1000000
 
 double A[N];
 
