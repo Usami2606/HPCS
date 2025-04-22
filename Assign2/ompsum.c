@@ -9,7 +9,7 @@ double second();
 
 int A[N];
 
-int sum(double *a, int n) {
+int sum(int *a, int n) {
     int i;
     int s = 0;
 #pragma omp parallel
