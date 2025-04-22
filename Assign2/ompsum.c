@@ -11,8 +11,12 @@ int A[N];
 long long sum(int *a, int n) {
     int i;
     long long s = 0;
+#pragma omp parallel
+{
+#pragma omp for reductions(+:s)
     for (i = 0; i < n; i++) s += a[i];
     return s;
+}
 }
 
 int main() {
@@ -21,11 +25,9 @@ int main() {
     int i, j;
 
     // Take 20 measurements
-#pragma omp parallel for
-{
-#pragma omp for reduction(+:s)
     for (j = 0; j < 20; j++) {
         start = second();
+#pragma omp parallel for
         for (i = 0; i < N; i++) A[i] = i;
         sum(A, N);  // Performing calculations
         end = second();
