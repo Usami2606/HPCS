@@ -22,7 +22,7 @@ int main() {
     int i, j;
 
     // Take 20 measurements
-#pragma omp parallel
+#pragma omp parallel for
 {
     for (j = 0; j < 20; j++) {
         start = second();
