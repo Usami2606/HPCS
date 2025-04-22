@@ -11,11 +11,8 @@ int A[N];
 long long sum(int *a, int n) {
     int i;
     long long s = 0;
-#pragma omp parallel
-{
 #pragma omp for reduction(+:s)
     for (i = 0; i < n; i++) s += a[i];
-}
     return s;
 }
 
@@ -25,6 +22,8 @@ int main() {
     int i, j;
 
     // Take 20 measurements
+#pragma omp parallel
+{
     for (j = 0; j < 20; j++) {
         start = second();
         for (i = 0; i < N; i++) A[i] = i;
@@ -32,6 +31,7 @@ int main() {
         end = second();
         times[j] = end - start;  // Save the measured time in an array
     }
+}
 
     // Calculate the average, maximum, and minimum
     double total_time = 0.0;
