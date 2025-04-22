@@ -8,33 +8,37 @@ double second();
 
 int A[N];
 
+// 配列の合計を計算する関数
 long long sum(int *a, int n) {
     int i;
     long long s = 0;
-#pragma omp parallel
-{
-#pragma omp for reductions(+:s)
-    for (i = 0; i < n; i++) s += a[i];
+    
+    // OpenMPで並列計算
+    #pragma omp parallel
+    {
+        #pragma omp for reduction(+:s) // reductionを正しく使用
+        for (i = 0; i < n; i++) {
+            s += a[i];
+        }
+    }
     return s;
-}
 }
 
 int main() {
     double start, end;
-    double times[20];  // Array to store measurement time
+    double times[20];  // 計測時間を格納する配列
     int i, j;
 
-    // Take 20 measurements
+    // 20回の計測を実行
     for (j = 0; j < 20; j++) {
-        start = second();
-        for (i = 0; i < N; i++) A[i] = i;
-        sum(A, N);  // Performing calculations
-        end = second();
-        times[j] = end - start;  // Save the measured time in an array
+        start = second();  // 計測開始時間
+        for (i = 0; i < N; i++) A[i] = i;  // 配列Aを初期化
+        sum(A, N);  // 計算を実行
+        end = second();  // 計測終了時間
+        times[j] = end - start;  // 時間を配列に保存
     }
-}
 
-    // Calculate the average, maximum, and minimum
+    // 計測時間の平均、最大、最小を計算
     double total_time = 0.0;
     double max_time = times[0];
     double min_time = times[0];
@@ -47,14 +51,15 @@ int main() {
 
     double average_time = total_time / 20.0;
 
-    // Output results
-    printf("Average time = %f seconds\n", average_time);
-    printf("Maximum time = %f seconds\n", max_time);
-    printf("Minimum time = %f seconds\n", min_time);
+    // 結果を表示
+    printf("平均時間 = %f 秒\n", average_time);
+    printf("最大時間 = %f 秒\n", max_time);
+    printf("最小時間 = %f 秒\n", min_time);
 
     return 0;
 }
 
+// 現在時刻を秒で返す関数
 double second() {
     struct timeval tm;
     double t;
