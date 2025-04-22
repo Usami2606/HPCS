@@ -27,7 +27,6 @@ int main() {
     // Take 20 measurements
     for (j = 0; j < 20; j++) {
         start = second();
-#pragma omp parallel for
         for (i = 0; i < N; i++) A[i] = i;
         sum(A, N);  // Performing calculations
         end = second();
