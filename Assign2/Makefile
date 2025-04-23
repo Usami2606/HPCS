@@ -1,6 +1,6 @@
 BIN_DIR = bin
 TARGET = $(BIN_DIR)/runprog
-FILE ?= ompsum.c  # デフォルトは ompsum.c
+FILE ?= ompsum.c  # default ompsum.c
 
 run:
 	mkdir -p $(BIN_DIR)
