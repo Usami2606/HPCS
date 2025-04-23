@@ -4,7 +4,7 @@ FILE ?= Sample1.c
 
 run:
 	mkdir -p $(BIN_DIR)
-	mpicc -Wall -std=c99 -o $(TARGET) $(FILE)
+	mpicc -Wall -o $(TARGET) $(FILE)
 
 clean:
 	rm -rf $(BIN_DIR)
