@@ -12,8 +12,10 @@ int main(int argc, char* argv[])
 
     MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
-
-    for (int size = 10000; size <= 20000; size += 10000) {
+	
+	int size;
+	
+    for (size = 10000; size <= 20000; size += 10000) {
         buf = malloc(sizeof(double) * size);  // 動的にサイズを変更
 
         if (myrank == 0) {
