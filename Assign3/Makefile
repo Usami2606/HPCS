@@ -1,6 +1,6 @@
 BIN_DIR = bin
 TARGET = $(BIN_DIR)/runprog
-FILE ?= Sample1.c
+FILE ?= p2p.c
 
 run:
 	mkdir -p $(BIN_DIR)
