@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
                 buf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
             }
         }
-		
+
 		MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
 
         start = second();
@@ -61,8 +61,6 @@ int main(int argc, char* argv[])
     for (n = 0; n < 20; n++) {
         printf("time%d = %f seconds\n", n, times[n]);
     }
-
-    MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
     return 0;
 }
