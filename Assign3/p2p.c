@@ -39,6 +39,8 @@ int main(int argc, char* argv[])
                 buf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
             }
         }
+		
+		MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
 
         start = second();
         // データを送信・受信
