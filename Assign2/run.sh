@@ -6,8 +6,6 @@ threads=1
 # Maximum number of threads (256)
 max_threads=256
 
-MV2_ENABLE_AFFINITY=1
-
 # Repeat until the number of threads exceeds the maximum
 while [ $threads -le $max_threads ]; do
     # Set OMP_NUM_THREADS
@@ -21,19 +19,6 @@ while [ $threads -le $max_threads ]; do
     threads=$((threads * 2))
 done
 
-MV2_ENABLE_AFFINITY=0
-
-while [ $threads -le $max_threads ]; do
-    # Set OMP_NUM_THREADS
-    export OMP_NUM_THREADS=$threads
-
-    # execution
-    echo "Running with $OMP_NUM_THREADS threads"
-    ./bin/runprog
-
-    # Double the number of threads
-    threads=$((threads * 2))
-done
 
 #!/bin/bash
 
