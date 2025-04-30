@@ -23,6 +23,18 @@ done
 
 MV2_ENABLE_AFFINITY=0
 
+while [ $threads -le $max_threads ]; do
+    # Set OMP_NUM_THREADS
+    export OMP_NUM_THREADS=$threads
+
+    # execution
+    echo "Running with $OMP_NUM_THREADS threads"
+    ./bin/runprog
+
+    # Double the number of threads
+    threads=$((threads * 2))
+done
+
 #!/bin/bash
 
 # # 引数チェック
