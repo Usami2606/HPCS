@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
     }
 
     for (n = 0; n < 20; n++) {
-        printf("time%d = %f seconds\n", n, times[n])
+        printf("time%d = %f seconds\n", n, times[n]);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
