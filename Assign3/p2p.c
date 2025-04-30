@@ -6,7 +6,7 @@ int main(int argc, char* argv[])
 {
 
         int myrank, nprocs, i;
-        int *buf;
+        double *buf;
         MPI_Status status;
 
         MPI_Init(&argc, &argv);
@@ -14,11 +14,11 @@ int main(int argc, char* argv[])
         MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
         MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
 
-        buf = malloc(sizeof(int)*20);
+        buf = malloc(sizeof(double)*20);
 
         if(myrank == 0){
                 for(i=0;i<20;i++){
-                        buf[i] = i;
+                        buf[i] = double(i);
                 }
         }
 
