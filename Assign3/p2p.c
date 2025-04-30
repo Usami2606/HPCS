@@ -1,9 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
+#include <sys/time.h>
+
+double second();
 
 int main(int argc, char* argv[])
 {
+	double start, end;
+	int m, n;
+	double times[20];
     int myrank, nprocs, i;
     double *buf;  // 配列の型をdoubleに変更
     MPI_Status status;
@@ -15,22 +21,28 @@ int main(int argc, char* argv[])
 	
 	int size;
 	
-    for (size = 10000; size <= 20000; size += 10000) {
-        buf = malloc(sizeof(double) * size);  // 動的にサイズを変更
+    for (m = 0; m < 20; m++) {
+        buf = malloc(sizeof(double) * m * 1000);  // 動的にサイズを変更
 
         if (myrank == 0) {
             // 送信するデータを設定
-            for (i = 0; i < size; i++) {
+            for (i = 0; i < m * 1000; i++) {
                 buf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
             }
         }
 
+		start = second();
         // データを送信・受信
         if (myrank == 0) {
             MPI_Send(buf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
         } else if (myrank == 1) {
             MPI_Recv(buf, size, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
         }
+
+		end = second();
+		times[m] = end - start;
+
+		free(buf);
 
         // // 送信したデータを表示（rank 0）
         // if (myrank == 0) {
@@ -41,6 +53,23 @@ int main(int argc, char* argv[])
         //     printf("}\n");
         // }
 	}
+
+	double total_time = 0.0;
+    double max_time = times[0];
+    double min_time = times[0];
+
+	for (n = 0; n < 20; n++) {
+        total_time += times[n];
+        if (times[i] > max_time) max_time = times[n];
+        if (times[i] < min_time) min_time = times[n];
+    }
+
+	double average_time = total_time / 20.0;
+
+    // Output results
+    printf("Average time = %f seconds\n", average_time);
+    printf("Maximum time = %f seconds\n", max_time);
+    printf("Minimum time = %f seconds\n", min_time);
 
 
     MPI_Barrier(MPI_COMM_WORLD);
@@ -53,8 +82,6 @@ int main(int argc, char* argv[])
     //     }
     //     printf("}\n");
     // }
-
-    free(buf);  // メモリ解放
     MPI_Finalize();
     return 0;
 }
