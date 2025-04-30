@@ -83,3 +83,12 @@ int main(int argc, char* argv[])
     MPI_Finalize();
     return 0;
 }
+
+double second() {
+    struct timeval tm;
+    double t;
+
+    gettimeofday(&tm, NULL);
+    t = (double)(tm.tv_sec) + ((double)(tm.tv_usec)) / 1.0e6;
+    return t;
+}
