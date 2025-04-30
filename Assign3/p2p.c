@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
 
     for (m = 0; m < 20; m++) {
-        int size = m * 1000;  // 配列のサイズを変更
+        int size = m * 10000;  // 配列のサイズを変更
         buf = malloc(sizeof(double) * size);  // 動的にサイズを変更
 
         // mallocの成功をチェック
@@ -56,22 +56,8 @@ int main(int argc, char* argv[])
         free(buf);
     }
 
-    // 全体の時間計測
-    double total_time = 0.0;
-    double max_time = times[0];
-    double min_time = times[0];
-
     for (n = 0; n < 20; n++) {
-        total_time += times[n];
-        if (times[n] > max_time) max_time = times[n];
-        if (times[n] < min_time) min_time = times[n];
-    }
-
-    // 結果の出力
-    if (myrank == 0) {
-        printf("Total time: %f\n", total_time);
-        printf("Max time: %f\n", max_time);
-        printf("Min time: %f\n", min_time);
+        printf("time%d = %f seconds\n", n, times[n])
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
