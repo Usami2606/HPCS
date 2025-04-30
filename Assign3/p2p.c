@@ -58,9 +58,13 @@ int main(int argc, char* argv[])
         free(buf);
     }
 
-    for (n = 0; n < 20; n++) {
-        printf("time%d = %f seconds\n", n, times[n]);
-    }
+    if (myrank == 1) {
+		for (n = 0; n < 20; n++) {
+			printf("time%d = %f seconds\n", n, times[n]);
+		}
+	}
+
+	MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
     return 0;
 }
