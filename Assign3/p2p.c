@@ -1,33 +1,51 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <mpi.h>
-#include <sys/time.h>
-#include "Timer.c"
-#define BUFSIZE (10 * 1024 * 1024)
 
-double second();
-
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
-	int rank, tag = 0;
-	MPI_Status status;
-	char sendbuf[1024];
-	char recvbuf[1024];
 
-	MPI_Init(&argc, &argv);
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	printf("rank = %d\n", rank);
-	
-	if (rank == 0) {
-		sprintf(sendbuf, "send data from rank0 to rank1");
-		MPI_Send(sendbuf, BUFSIZE, MPI_BYTE, 1, tag, MPI_COMM_WORLD);
-	} 
-	else if (rank == 1) {
-		float start = second();
-		MPI_Recv(recvbuf, BUFSIZE, MPI_BYTE, 0, tag, MPI_COMM_WORLD, &status);
-		printf("recv string = %s\n", recvbuf);
-		float end = second();
-		printf("Rank 1: Recv time = %f seconds\n", end - start);
-	}
-	MPI_Finalize();
-	return 0;
+        int myrank, nprocs, i;
+        int *buf;
+        MPI_Status status;
+
+        MPI_Init(&argc, &argv);
+
+        MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
+        MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
+
+        buf = malloc(sizeof(int)*20);
+
+        if(myrank == 0){
+                for(i=0;i<20;i++){
+                        buf[i] = i;
+                }
+        }
+
+        if(myrank == 0){
+                MPI_Send(buf, 20, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        }else if(myrank == 1){
+                MPI_Recv(buf, 20, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+        }
+
+        if(myrank == 0){
+                printf("[%d/%d] send data = {", myrank, nprocs);
+                for(i=0;i<20;i++){
+                        printf("%d,", buf[i]);
+                }
+                printf("}\n");
+        }
+
+        MPI_Barrier(MPI_COMM_WORLD);
+
+        if(myrank == 1){
+                printf("[%d/%d] recv data = {", myrank, nprocs);
+                for(i=0;i<20;i++){
+                        printf("%d,", buf[i]);
+                }
+                printf("}\n");
+        }
+
+        MPI_Finalize();
+        return 0;
 }
