@@ -19,6 +19,6 @@ salloc -p ${PART} -N 1\
             -w ${NODE}\
             mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
 
-salloc -p ${PART} -N 1\
+salloc -p ${PART} -N 2\
             -w ${NODE}\
             mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
