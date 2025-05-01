@@ -13,7 +13,7 @@ NUM_NODE=$3
 MV2_ENABLE_AFFINITY=0
 # Execution
 
-PART=comq
+PART=bdw-mixed
 NODE=ppx00
 echo "Running with $OMP_NUM_THREADS threads and $NUM_PROCS MPI processes"
 salloc -p ${PART} -N ${NUM_NODE}\
