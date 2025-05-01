@@ -1,3 +1,5 @@
+MPI_PerformanceTest
+
 macbook M1 pro 
 sysctl -n hw.physicalcpu : 8
 sysctl -n hw.logicalcpu : 8
@@ -15,4 +17,7 @@ $hostname
 $scutil --get HostName
 $scutil --get LocalHostName
 $scutil --get ComputerName
+
+Granting execution permissions
+chmod +x filename
 
