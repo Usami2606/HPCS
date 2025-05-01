@@ -18,3 +18,7 @@ echo "Running with $OMP_NUM_THREADS threads and $NUM_PROCS MPI processes"
 salloc -p ${PART} -N 1\
             -w ${NODE}\
             mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
+
+salloc -p ${PART} -N 1\
+            -w ${NODE}\
+            mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
