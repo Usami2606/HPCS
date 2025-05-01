@@ -11,5 +11,10 @@ NUM_PROCS=$2
 
 MV2_ENABLE_AFFINITY=0
 # Execution
+
+PART=comq
+NODE=ppx00
 echo "Running with $OMP_NUM_THREADS threads and $NUM_PROCS MPI processes"
-mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
+salloc -p ${PART} -N 1\
+            -w ${NODE}\
+            mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
