@@ -23,6 +23,15 @@ int main(int argc, char* argv[])
     MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
 
+    // ここでプロセス数が1でないことを確認
+    if (nprocs < 2) {
+        if (myrank == 0) {
+            fprintf(stderr, "This program requires at least 2 processes.\n");
+        }
+        MPI_Finalize();
+        return 1;
+    }
+
     for (m = 0; m < 20; m++) {
         int size = m * 100000;  // 配列のサイズを変更
         buf = malloc(sizeof(double) * size);  // 動的にサイズを変更
@@ -40,7 +49,7 @@ int main(int argc, char* argv[])
             }
         }
 
-		MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
+        MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
 
         start = second();
         // データを送信・受信
@@ -59,12 +68,12 @@ int main(int argc, char* argv[])
     }
 
     if (myrank == 1) {
-		for (n = 0; n < 20; n++) {
-			printf("time%d = %f seconds\n", n, times[n]);
-		}
-	}
+        for (n = 0; n < 20; n++) {
+            printf("time%d = %f seconds\n", n, times[n]);
+        }
+    }
 
-	MPI_Barrier(MPI_COMM_WORLD);
+    MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
     return 0;
 }
