@@ -68,7 +68,10 @@ int main(int argc, char* argv[])
         end = second();
 
         // 時間を記録
-        times[m] = end - start;
+        if  (times[m] < end - start) {
+            times[m] = end - start;
+        }
+
 
         // bufのメモリ解放
         free(sendbuf);
@@ -76,6 +79,10 @@ int main(int argc, char* argv[])
     }
 
     if (myrank == 1) {
+        for (n = 0; n < 20; n++) {
+            printf("time%d = %f seconds\n", n, times[n]);
+        }
+    } else if (myrank == 0) {
         for (n = 0; n < 20; n++) {
             printf("time%d = %f seconds\n", n, times[n]);
         }
