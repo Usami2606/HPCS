@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     if (myrank == 0) {
         // 送信するデータを設定
         for (i = 0; i < size; i++) {
-            sendbuf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
+            sendbuf[i] = (double)rand() / (double)RAND_MAX;  // 例として、iを1.1倍した値を設定
         }
     }
 
