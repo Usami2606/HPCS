@@ -37,10 +37,10 @@ int main(int argc, char* argv[])
 
     for (m = 0; m < 20; m++) {
         int size = m * 1000000;  // 配列のサイズを変更
-        sentbuf = malloc(sizeof(double) * size);  // 動的にサイズを変更
+        sendbuf = malloc(sizeof(double) * size);  // 動的にサイズを変更
         recvbuf = malloc(sizeof(double) * size);
         // mallocの成功をチェック
-        if (buf == NULL) {
+        if (sendbuf == NULL) {
             fprintf(stderr, "Memory allocation failed for size %d\n", size);
             MPI_Abort(MPI_COMM_WORLD, 1);  // メモリ割り当てに失敗した場合、MPIプログラムを終了
         }
