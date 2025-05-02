@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     int m, n;
     double times[20];
     int myrank, nprocs, i;
-    double *buf;  // 配列の型をdoubleに変更
+    double *sendbuf, *recvbuf;  // 配列の型をdoubleに変更
     MPI_Status status;
 
     MPI_Init(&argc, &argv);
@@ -55,8 +55,6 @@ int main(int argc, char* argv[])
         MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
         start = second();
         // データを送信・受信
-
-        MPI_Status status;
         if (myrank == 0) {
             MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
         } else if (myrank == 1) {
