@@ -62,14 +62,14 @@ int main(int argc, char* argv[])
     // 送信時間の計測
     start = MPI_Wtime();
     if (myrank == 0) {
-        MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
+        MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 2025, MPI_COMM_WORLD);
     }
     send_time = MPI_Wtime() - start;  // 送信の時間を計測
 
     // 受信時間の計測
     start = MPI_Wtime();
     if (myrank == 1) {
-        MPI_Recv(recvbuf, size, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
+        MPI_Recv(recvbuf, size, MPI_DOUBLE, 0, 2025, MPI_COMM_WORLD, &status);
     }
     recv_time = MPI_Wtime() - start;  // 受信の時間を計測
 
