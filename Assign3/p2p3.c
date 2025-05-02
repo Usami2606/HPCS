@@ -13,8 +13,7 @@ double second() {
 
 int main(int argc, char* argv[])
 {
-    double start, end, send_time, recv_time, sync_time;
-    double times[20];
+    double start, send_time, recv_time, sync_time;
     int myrank, nprocs, i;
     double *sendbuf, *recvbuf;  // 配列の型をdoubleに変更
     MPI_Status status;
