@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
     }
 
     MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
-    start = MPI_Write();
+    start = MPI_Wtime();
     // データを送信・受信
     if (myrank == 0) {
         MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
         MPI_Recv(recvbuf, size, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
     }
     MPI_Barrier(MPI_COMM_WORLD);  
-    end = MPI_Write();
+    end = MPI_Wtime();
 
     if (myrank == 0) {
         times[0] = end - start;
