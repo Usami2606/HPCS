@@ -13,7 +13,6 @@ double second() {
 int main(int argc, char* argv[])
 {
     double start, end;
-    int m;
     double times[20];
     int myrank, nprocs, i;
     double *sendbuf, *recvbuf;  // 配列の型をdoubleに変更
@@ -39,53 +38,48 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    for (m = 0; m < 20; m++) {
-        int size = m * 1000000;  // 配列のサイズを変更
-        sendbuf = malloc(sizeof(double) * size);  // 動的にサイズを変更
-        recvbuf = malloc(sizeof(double) * size);
-        // mallocの成功をチェック
-        if (sendbuf == NULL) {
-            fprintf(stderr, "Memory allocation failed for size %d\n", size);
-            MPI_Abort(MPI_COMM_WORLD, 1);  // メモリ割り当てに失敗した場合、MPIプログラムを終了
-        }
 
-        if (myrank == 0) {
-            // 送信するデータを設定
-            for (i = 0; i < size; i++) {
-                sendbuf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
-            }
-        }
-
-        MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
-        start = second();
-        // データを送信・受信
-        if (myrank == 0) {
-            MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
-        } else if (myrank == 1) {
-            MPI_Recv(recvbuf, size, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
-        }
-        MPI_Barrier(MPI_COMM_WORLD);  
-        end = second();
-
-        if(myrank == 1){
-            printf("[%d/%d] recv data = {", myrank, nprocs);
-            for(i=0;i<3;i++){
-                    printf("%f,", recvbuf[i]);
-            }
-            printf("}\n");
-        }
-
-        // 時間を記録
-        if  (times[m] < end - start) {
-            times[m] = end - start;
-            printf("time%d = %f seconds\n", m, times[m]);
-        }
-
-
-        // bufのメモリ解放
-        free(sendbuf);
-        free(recvbuf);
+    int size = 100000;  // 配列のサイズを変更
+    sendbuf = malloc(sizeof(double) * size);  // 動的にサイズを変更
+    recvbuf = malloc(sizeof(double) * size);
+    // mallocの成功をチェック
+    if (sendbuf == NULL) {
+        fprintf(stderr, "Memory allocation failed for size %d\n", size);
+        MPI_Abort(MPI_COMM_WORLD, 1);  // メモリ割り当てに失敗した場合、MPIプログラムを終了
     }
+
+    if (myrank == 0) {
+        // 送信するデータを設定
+        for (i = 0; i < size; i++) {
+            sendbuf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
+        }
+    }
+
+    MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
+    start = second();
+    // データを送信・受信
+    if (myrank == 0) {
+        MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
+    } else if (myrank == 1) {
+        MPI_Recv(recvbuf, size, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
+    }
+    MPI_Barrier(MPI_COMM_WORLD);  
+    end = second();
+
+    if (myrank == 0) {
+        times[0] = end - start;
+        printf("%f\n", times[0]);
+    } else if (myrank == 1) {
+        times[1] = end - start;
+        printf("%f\n", times[1]);
+    }
+
+
+    // bufのメモリ解放
+    free(sendbuf);
+    free(recvbuf);
+    
+    printf("freebuffer\n");
 
 
     MPI_Barrier(MPI_COMM_WORLD);

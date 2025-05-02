@@ -42,6 +42,10 @@ int main(int argc, char* argv[])
     int size = 100000;  // 配列のサイズを変更
     sendbuf = malloc(sizeof(double) * size);  // 動的にサイズを変更
     recvbuf = malloc(sizeof(double) * size);
+
+
+    memset(sendbuf, 0, sizeof(double) * size);
+    memset(recvbuf, 0, sizeof(double) * size);
     // mallocの成功をチェック
     if (sendbuf == NULL) {
         fprintf(stderr, "Memory allocation failed for size %d\n", size);
