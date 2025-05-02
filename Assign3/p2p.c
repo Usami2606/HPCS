@@ -67,9 +67,18 @@ int main(int argc, char* argv[])
         MPI_Barrier(MPI_COMM_WORLD);  
         end = second();
 
+        if(myrank == 1){
+            printf("[%d/%d] recv data = {", myrank, nprocs);
+            for(i=0;i<3;i++){
+                    printf("%d,", recvbuf[i]);
+            }
+            printf("}\n");
+        }
+
         // 時間を記録
         if  (times[m] < end - start) {
             times[m] = end - start;
+            printf("time%d = %f seconds\n", m, times[m]);
         }
 
 
@@ -78,15 +87,6 @@ int main(int argc, char* argv[])
         free(recvbuf);
     }
 
-    if (myrank == 1) {
-        for (n = 0; n < 20; n++) {
-            printf("time%d = %f seconds\n", n, times[n]);
-        }
-    } else if (myrank == 0) {
-        for (n = 0; n < 20; n++) {
-            printf("time%d = %f seconds\n", n, times[n]);
-        }
-    }
 
     MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
