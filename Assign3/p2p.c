@@ -13,7 +13,7 @@ double second() {
 int main(int argc, char* argv[])
 {
     double start, end;
-    int m, n;
+    int m;
     double times[20];
     int myrank, nprocs, i;
     double *sendbuf, *recvbuf;  // 配列の型をdoubleに変更
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
         if(myrank == 1){
             printf("[%d/%d] recv data = {", myrank, nprocs);
             for(i=0;i<3;i++){
-                    printf("%d,", recvbuf[i]);
+                    printf("%f,", recvbuf[i]);
             }
             printf("}\n");
         }
