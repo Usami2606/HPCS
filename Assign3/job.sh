@@ -16,6 +16,6 @@ MV2_ENABLE_AFFINITY=1
 PART=bdw-mixed
 NODE=ppx00
 echo "Running with $OMP_NUM_THREADS threads and $NUM_PROCS MPI processes and $NODE_NUMBER Node"
-salloc -p ${PART} -npernode ${NUM_NODE}\
+salloc -p ${PART}  -N ${NUM_NODE} -n ${NUM_PROCS} --ntasks-per-core=1\
             -w ppx00,ppx02\
             mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
