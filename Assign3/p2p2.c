@@ -1,6 +1,7 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 double second() {
     struct timeval tv;
