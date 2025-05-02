@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     }
 
     for (m = 0; m < 20; m++) {
-        int size = m * 100000;  // 配列のサイズを変更
+        int size = m * 1000000;  // 配列のサイズを変更
         buf = malloc(sizeof(double) * size);  // 動的にサイズを変更
 
         // mallocの成功をチェック
