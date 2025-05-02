@@ -22,6 +22,9 @@ int main(int argc, char* argv[])
 
     MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
+    printf("%d/%d\n",myrank, nprocs);
+
+    
 
     // ここでプロセス数が1でないことを確認
     if (nprocs < 2) {
@@ -48,9 +51,12 @@ int main(int argc, char* argv[])
                 sendbuf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
             }
         }
-        start = second();
+
         MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
+        start = second();
         // データを送信・受信
+
+        MPI_Status status;
         if (myrank == 0) {
             MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
         } else if (myrank == 1) {
