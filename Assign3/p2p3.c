@@ -68,10 +68,10 @@ int main(int argc, char* argv[])
     end = second();
 
     if (myrank == 0) {
-        times[0] = end - start
+        times[0] = end - start;
         printf("%f\n", times[0]);
     } else if (myrank == 1) {
-        times[1] = end - start
+        times[1] = end - start;
         printf("%f\n", times[1]);
     }
 
