@@ -13,7 +13,7 @@ NUM_NODE=$2
 MV2_ENABLE_AFFINITY=1
 # Execution
 
-PART=bdw-mixed
+PART=bdw1-mixed
 NODE=ppx00
 echo "Running with $OMP_NUM_THREADS threads and $NUM_PROCS MPI processes and $NUM_NODE Node"
 salloc -p ${PART} -N ${NUM_NODE} -n ${NUM_PROCS} --ntasks-per-core=1 -w ppx00 \

@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 
     MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
-    printf("%d/%d\n",myrank, nprocs);
+    printf("my rank is %d and size is %d\n",myrank, nprocs);
 
     char hostname[256];
     gethostname(hostname, sizeof(hostname));
