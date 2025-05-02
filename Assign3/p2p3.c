@@ -12,14 +12,14 @@ double second() {
 }
 
 int main(int argc, char* argv[])
-{
+{   
+
+    MPI_Init(&argc, &argv);
     double start, end;
     double times[20];
     int myrank, nprocs, i;
     double *sendbuf, *recvbuf;  // 配列の型をdoubleに変更
     MPI_Status status;
-
-    MPI_Init(&argc, &argv);
 
     MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
