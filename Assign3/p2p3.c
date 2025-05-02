@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
     free(sendbuf);
     free(recvbuf);
     
-    printf("freebuffer")
+    printf("freebuffer");
 
 
     MPI_Barrier(MPI_COMM_WORLD);
