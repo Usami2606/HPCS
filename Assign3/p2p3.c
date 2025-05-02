@@ -3,6 +3,7 @@
 #include <mpi.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <string.h> 
 
 double second() {
     struct timeval tv;
