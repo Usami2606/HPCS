@@ -34,8 +34,8 @@ int main(int argc, char* argv[])
 
     for (m = 0; m < 20; m++) {
         int size = m * 1000000;  // 配列のサイズを変更
-        buf = malloc(sizeof(double) * size);  // 動的にサイズを変更
-
+        sentbuf = malloc(sizeof(double) * size);  // 動的にサイズを変更
+        recvbuf = malloc(sizeof(double) * size);
         // mallocの成功をチェック
         if (buf == NULL) {
             fprintf(stderr, "Memory allocation failed for size %d\n", size);
@@ -45,19 +45,18 @@ int main(int argc, char* argv[])
         if (myrank == 0) {
             // 送信するデータを設定
             for (i = 0; i < size; i++) {
-                buf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
+                sendbuf[i] = (double)i * 1.1;  // 例として、iを1.1倍した値を設定
             }
         }
-
-        MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
-
         start = second();
+        MPI_Barrier(MPI_COMM_WORLD);  // 同期を取る
         // データを送信・受信
         if (myrank == 0) {
-            MPI_Send(buf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
+            MPI_Send(sendbuf, size, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
         } else if (myrank == 1) {
-            MPI_Recv(buf, size, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
+            MPI_Recv(recvbuf, size, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
         }
+        MPI_Barrier(MPI_COMM_WORLD);  
         end = second();
 
         // 時間を記録
