@@ -67,7 +67,8 @@ int main(int argc, char* argv[])
         times[m] = end - start;
 
         // bufのメモリ解放
-        free(buf);
+        free(sendbuf);
+        free(recvbuf);
     }
 
     if (myrank == 1) {
