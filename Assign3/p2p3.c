@@ -13,7 +13,6 @@ double second() {
 int main(int argc, char* argv[])
 {
     double start, end;
-    int m;
     double times[20];
     int myrank, nprocs, i;
     double *sendbuf, *recvbuf;  // 配列の型をdoubleに変更
@@ -40,7 +39,7 @@ int main(int argc, char* argv[])
     }
 
 
-    int size = m * 1000000;  // 配列のサイズを変更
+    int size = 100000;  // 配列のサイズを変更
     sendbuf = malloc(sizeof(double) * size);  // 動的にサイズを変更
     recvbuf = malloc(sizeof(double) * size);
     // mallocの成功をチェック
