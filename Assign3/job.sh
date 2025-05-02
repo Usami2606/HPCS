@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if [ $# -lt 2 ]; then
-    echo "Usage: $0 <num_threads> <num_procs> <num_node>"
+    echo "Usage: $0 <num_threads> <num_node>"
     exit 1
 fi
 
 # 引数でスレッド数とプロセス数を設定
 export OMP_NUM_THREADS=$1
-NUM_PROCS=$2
+NUM_PROCS=2
 NUM_NODE=$3
 
 MV2_ENABLE_AFFINITY=1
@@ -16,6 +16,6 @@ MV2_ENABLE_AFFINITY=1
 PART=bdw-mixed
 NODE=ppx00
 echo "Running with $OMP_NUM_THREADS threads and $NUM_PROCS MPI processes and $NODE_NUMBER Node"
-salloc -p ${PART} -N ${NUM_NODE}\
+salloc -p ${PART} -npernode ${NUM_NODE}\
             -w ppx00,ppx02\
             mpirun -np $NUM_PROCS --mca mpi_warn_on_fork 0 ./bin/runprog
