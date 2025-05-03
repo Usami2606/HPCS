@@ -1,17 +1,17 @@
-MPI_PerformanceTest
+# MPI_PerformanceTest
 
-macbook M1 pro 
+## macbook M1 pro 
 sysctl -n hw.physicalcpu : 8
 sysctl -n hw.logicalcpu : 8
 
-ppx
+## ppx
 lscpu
 Physical cpu core 
 
-change hostname
+## change hostname
 $sudo scutil --set HostName Usamis-Macbook-pro
 
-check hostname 
+## check hostname 
 $hostname
 
 $scutil --get HostName
